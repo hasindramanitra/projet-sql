@@ -7,7 +7,6 @@ create table parking_floor(
 
 create parking_spot(
     num_parking_spot int(11) primary key auto_increment,
-    hourly_price_parking_spot float ,
     color_parking_spot varchar(255),
     is_free boolean,
     num_parking_floor int(11),
@@ -40,3 +39,21 @@ create table parc(
     foreign key (num_parking_spot) references parking_spot(num_parking_spot),
     foreign key (num_exit_gate) references exit_gate(num_exit_gate)
 );
+
+
+/*modification de la table parking_spot et creation de la table parking_rate*/
+
+use carmap;
+drop hourly_price_parking_spot;
+
+create table parking_rate(
+    num_parking_rate int(11) primary key auto_increment,
+    hourly_price float,
+    discount int(11)
+);
+
+alter table parking_floor
+add num_parking_rate int(11);
+
+alter table parking_floor
+add foreign key (num_parking_rate) references parking_floor(num_parking_rate);
